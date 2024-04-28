@@ -3,82 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document Storage</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
-        }
-        h1 {
-            text-align: center;
-        }
-        #uploadForm {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        #fileList {
-            list-style-type: none;
-            padding: 0;
-        }
-        #fileList li {
-            margin-bottom: 10px;
-        }
-        .download-link {
-            cursor: pointer;
-            color: blue;
-        }
-        .download-link:hover {
-            text-decoration: underline;
-        }
-    </style>
+    <title>Multiple File Upload and Download</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Document Storage</h1>
-    
-    <!-- Form for uploading documents -->
-    <div id="uploadForm">
-        <input type="file" id="fileInput">
-        <button onclick="uploadFile()">Upload</button>
+    <div class="container">
+        <h1>Multiple File Upload</h1>
+        <form action="upload.php" method="post" enctype="multipart/form-data">
+            <input type="file" name="files[]" multiple>
+            <button type="submit" name="submit">Upload Files</button>
+        </form>
+
+        <h1>Uploaded Files</h1>
+        <ul id="file-list">
+            <!-- List of uploaded files will be displayed here -->
+        </ul>
     </div>
 
-    <!-- List to display uploaded documents -->
-    <ul id="fileList"></ul>
-
-    <script>
-        // Function to handle file upload
-        function uploadFile() {
-            var fileInput = document.getElementById('fileInput');
-            var fileList = document.getElementById('fileList');
-
-            // Get the uploaded file
-            var file = fileInput.files[0];
-
-            // Create a new list item to display the file name
-            var listItem = document.createElement('li');
-            listItem.textContent = file.name;
-            
-            // Create download link for the file
-            var downloadLink = document.createElement('a');
-            downloadLink.textContent = "Download";
-            downloadLink.className = "download-link";
-            downloadLink.href = "#";
-            downloadLink.onclick = function() {
-                downloadFile(file.name);
-            };
-            listItem.appendChild(downloadLink);
-
-            fileList.appendChild(listItem);
-
-            // You can send the file to the server for processing here
-            // For simplicity, we're not implementing server-side processing in this example
-        }
-
-        // Dummy function for downloading file (to be replaced with actual download logic)
-        function downloadFile(fileName) {
-            alert('Downloading: ' + fileName);
-            // You would typically implement logic here to initiate a download from the server
-        }
-    </script>
+    <script src="scripts.js"></script>
 </body>
 </html>
