@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document Upload & Download</title>
+    <title>Document Storage</title>
     <style>
-        /* Basic styling for the page */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -25,10 +24,17 @@
         #fileList li {
             margin-bottom: 10px;
         }
+        .download-link {
+            cursor: pointer;
+            color: blue;
+        }
+        .download-link:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
-    <h1>Document Upload & Download</h1>
+    <h1>Document Storage</h1>
     
     <!-- Form for uploading documents -->
     <div id="uploadForm">
@@ -51,15 +57,25 @@
             // Create a new list item to display the file name
             var listItem = document.createElement('li');
             listItem.textContent = file.name;
+            
+            // Create download link for the file
+            var downloadLink = document.createElement('a');
+            downloadLink.textContent = "Download";
+            downloadLink.className = "download-link";
+            downloadLink.href = "#";
+            downloadLink.onclick = function() {
+                downloadFile(file.name);
+            };
+            listItem.appendChild(downloadLink);
+
             fileList.appendChild(listItem);
 
             // You can send the file to the server for processing here
             // For simplicity, we're not implementing server-side processing in this example
         }
 
-        // Function to handle file download (dummy function for demonstration)
+        // Dummy function for downloading file (to be replaced with actual download logic)
         function downloadFile(fileName) {
-            // Simulate downloading the file
             alert('Downloading: ' + fileName);
             // You would typically implement logic here to initiate a download from the server
         }
